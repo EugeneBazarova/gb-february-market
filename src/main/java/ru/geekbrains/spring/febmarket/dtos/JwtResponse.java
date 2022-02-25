@@ -1,12 +1,13 @@
-//package ru.geekbrains.spring.febmarket.dtos;
-//
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-//
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//public class JwtResponse {
-//    private String token;
-//}
+package ru.geekbrains.spring.febmarket.dtos;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class JwtResponse {
+    private String token;
+}
+

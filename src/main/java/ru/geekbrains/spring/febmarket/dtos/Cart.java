@@ -7,25 +7,32 @@ import ru.geekbrains.spring.febmarket.entities.Product;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
-@Component
 @Data
-@NoArgsConstructor
 public class Cart {
-    private List<Product> products;
+    private List<CartItem> items;
+    private int totalPrice;
 
-    @PostConstruct
-    public void init() {
-        this.products = new ArrayList<>();
+    public Cart() {
+        this.items = new ArrayList<>();
     }
 
-    public void addProductToCart(Product product) {
-        products.add(product);
+    public List<CartItem> getItems() {
+        return Collections.unmodifiableList(items);
     }
 
-    public void deleteProductFromCart(Product product) {
-        products.remove(product);
+    public void add(Product product) { // TODO: Доработать в ДЗ
+        items.add(new CartItem(product.getId(), product.getTitle(), 1, product.getPrice(), product.getPrice()));
+        recalculate();
+    }
+
+    private void recalculate() {
+        totalPrice = 0;
+        for (CartItem item : items) {
+            totalPrice += item.getPrice();
+        }
     }
 }

@@ -4,30 +4,30 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.spring.febmarket.dtos.Cart;
 import ru.geekbrains.spring.febmarket.entities.Product;
-import ru.geekbrains.spring.febmarket.repositories.ProductRepository;
+import ru.geekbrains.spring.febmarket.exceptions.ResourceNotFoundException;
 
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 
 @Service
 @RequiredArgsConstructor
 public class CartService {
-    private final ProductRepository productRepository;
+    private final ProductService productService;
+    private Cart tempCart;
 
-    private final Cart cart;
-
-    public List<Product> findAllProductsInCart() {
-        return cart.getProducts();
+    @PostConstruct
+    public void init() {
+        tempCart = new Cart();
     }
 
-    public void addProductToCart(Long productId){
-        Product product = productRepository.findById(productId).get();
-        cart.addProductToCart(product);
+    public Cart getCurrentCart() {
+        return tempCart;
     }
 
-    public void deleteProductFromCart(Long productId){
-        Product product = productRepository.findById(productId).get();
-        cart.deleteProductFromCart(product);
+    public void add(Long productId) {
+        Product product = productService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Не удается добавить продукт с id: " + productId + " в корзину. Продукт не найден"));
+        tempCart.add(product);
     }
 }
