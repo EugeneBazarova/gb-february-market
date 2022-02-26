@@ -35,10 +35,7 @@ public class Cart {
         }
     }
 
-    //    public void deleteFromCart(Product product) {
-//        items.remove(product);
-//        recalculate();
-//    }
+
     private CartItem findOrderFromProduct(Product product) {
         return items.stream().filter(o -> o.getProductId().equals(product.getId())).findFirst().orElse(null);
     }

@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import ru.geekbrains.spring.febmarket.dtos.Cart;
 import ru.geekbrains.spring.febmarket.entities.Product;
 import ru.geekbrains.spring.febmarket.exceptions.ResourceNotFoundException;
-import ru.geekbrains.spring.febmarket.repositories.ProductRepository;
-
 
 import javax.annotation.PostConstruct;
 
@@ -15,7 +13,6 @@ import javax.annotation.PostConstruct;
 @RequiredArgsConstructor
 public class CartService {
     private final ProductService productService;
-    private final ProductRepository productRepository;
     private Cart tempCart;
 
     @PostConstruct
@@ -33,18 +30,12 @@ public class CartService {
         tempCart.add(product);
     }
 
-//    public void deleteProductFromCart(Long productId){
-//        Product product = productRepository.findById(productId).get();
-//        tempCart.deleteFromCart(product);
-//    }
-
     public void deleteProductFromCart(Long productId) {
         Product product = productService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Не удается найти продукт с id: " + productId));
         tempCart.deleteProductFromCart(product);
     }
 
-    public void remove() {
+    public void remove(){
         tempCart.remove();
     }
-
 }
