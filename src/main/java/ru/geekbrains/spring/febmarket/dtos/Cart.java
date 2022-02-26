@@ -27,16 +27,29 @@ public class Cart {
         recalculate();
     }
 
-    public void deleteFromCart(Product product) {
-        items.remove(product);
-    }
-
 
     private void recalculate() {
         totalPrice = 0;
         for (CartItem item : items) {
             totalPrice += item.getPrice();
         }
+    }
+
+    //    public void deleteFromCart(Product product) {
+//        items.remove(product);
+//        recalculate();
+//    }
+    private CartItem findOrderFromProduct(Product product) {
+        return items.stream().filter(o -> o.getProductId().equals(product.getId())).findFirst().orElse(null);
+    }
+
+    public void deleteProductFromCart(Product product) {
+        CartItem item = findOrderFromProduct(product);
+        if (item == null) {
+            return;
+        }
+        items.remove(item);
+        recalculate();
     }
 
     public void remove() {

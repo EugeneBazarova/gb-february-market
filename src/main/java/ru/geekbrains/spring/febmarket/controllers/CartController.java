@@ -22,9 +22,10 @@ public class CartController {
         return cartService.getCurrentCart();
     }
 
-    @DeleteMapping("/delete/{productId}")
-    public void deleteProductFromCart(@PathVariable Long productId) {
-        cartService.deleteProductFromCart(productId);
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteFromCart(@PathVariable Long id) {
+        cartService.deleteProductFromCart(id);
     }
 
     @GetMapping("/clear")

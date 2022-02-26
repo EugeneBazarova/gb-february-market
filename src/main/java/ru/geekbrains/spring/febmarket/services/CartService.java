@@ -33,9 +33,14 @@ public class CartService {
         tempCart.add(product);
     }
 
-    public void deleteProductFromCart(Long productId){
-        Product product = productRepository.findById(productId).get();
-        tempCart.deleteFromCart(product);
+//    public void deleteProductFromCart(Long productId){
+//        Product product = productRepository.findById(productId).get();
+//        tempCart.deleteFromCart(product);
+//    }
+
+    public void deleteProductFromCart(Long productId) {
+        Product product = productService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Не удается найти продукт с id: " + productId));
+        tempCart.deleteProductFromCart(product);
     }
 
     public void remove() {
