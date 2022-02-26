@@ -1,11 +1,8 @@
 package ru.geekbrains.spring.febmarket.dtos;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 import ru.geekbrains.spring.febmarket.entities.Product;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +13,7 @@ public class Cart {
     private List<CartItem> items;
     private int totalPrice;
 
+
     public Cart() {
         this.items = new ArrayList<>();
     }
@@ -24,10 +22,15 @@ public class Cart {
         return Collections.unmodifiableList(items);
     }
 
-    public void add(Product product) { // TODO: Доработать в ДЗ
-        items.add(new CartItem(product.getId(), product.getTitle(), 1, product.getPrice(), product.getPrice()));
+    public void add(Product product) {
+        items.add(new CartItem(product.getId(), product.getTitle(), product.getInfo(), 1, product.getPrice(), product.getPrice()));
         recalculate();
     }
+
+    public void deleteFromCart(Product product) {
+        items.remove(product);
+    }
+
 
     private void recalculate() {
         totalPrice = 0;
@@ -35,4 +38,11 @@ public class Cart {
             totalPrice += item.getPrice();
         }
     }
+
+    public void remove() {
+        items.clear();
+        recalculate();
+    }
+
+
 }

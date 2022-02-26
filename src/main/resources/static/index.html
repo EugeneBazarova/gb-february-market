@@ -15,10 +15,10 @@
 <body>
 
 <div class="container" ng-controller="indexController">
-    <h1>Market</h1>
+    <h1>Список продуктов</h1>
 
     <h3>Список товаров</h3>
-    <table class="table table-hover" cellpadding="0" cellspacing="0">
+    <table class="table table-hover">
         <tr>
             <td>ID</td>
             <td>Название</td>
@@ -30,35 +30,43 @@
             <td>{{p.id}}</td>
             <td>{{p.title}}</td>
             <td>{{p.price}}</td>
-            <td>
+            <td class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="button" class="btn btn-primary" ng-click="addToCart(p.id)">Добавить в корзину</button>
-                <!--                <button type="button" class="btn btn-primary" ng-click="showProductInfo(p.id)">Info</button>-->
-                <!--                <button type="button" class="btn btn-danger" ng-click="deleteProductById(p.id)">Delete</button>-->
+                <button type="button" class="btn btn-secondary" style="margin: 0px 10px 0px" ng-click="showProductInfo(p.id)">Инфо</button>
+                <button type="button" class="btn btn-danger" ng-click="deleteProductById(p.id)">Удалить</button>
             </td>
         </tr>
         </tbody>
     </table>
     <p></p>
-    <h3>Корина</h3>
-    <table class="table table-hover" cellpadding="0" cellspacing="0">
+    <h3>Корзина</h3>
+    <table class="table table-hover">
         <tr>
             <td>Название</td>
             <td>Количество</td>
             <td>Цена</td>
+            <td></td>
         </tr>
         <tbody>
         <tr ng-repeat="item in cart.items">
             <td>{{item.productTitle}}</td>
             <td>{{item.quantity}}</td>
             <td>{{item.pricePerProduct + ' x ' + item.quantity + ' = ' + item.price}}</td>
+            <td class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="button" class="btn btn-danger" ng-click="deleteFromCart(item.productId)">Удалить</button>
+            </td>
         </tr>
         <tr>
             <td>Итого</td>
+            <td></td>
             <td></td>
             <td>{{cart.totalPrice}}</td>
         </tr>
         </tbody>
     </table>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+         <button type="button" class="btn btn-danger" ng-click="clearCart()" >Очистить корзину</button>
+    </div>
 </div>
 </body>
 </html>

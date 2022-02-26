@@ -19,14 +19,18 @@ public class ProductController {
 
     @GetMapping
     public List<ProductDto> findAllProducts() {
-        return productService.findAll().stream().map(p -> new ProductDto(p.getId(), p.getTitle(), p.getPrice())).collect(Collectors.toList());
+        return productService.findAll().stream().map(p -> new ProductDto(p.getId(), p.getTitle(), p.getInfo(), p.getPrice())).collect(Collectors.toList());
     }
 
 
     @GetMapping("/{id}")
     public ProductDto findProductById(@PathVariable Long id) {
         Product p = productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Продукт не найден, id: " + id));
-        return new ProductDto(p.getId(), p.getTitle(), p.getPrice());
+        return new ProductDto(p.getId(), p.getTitle(), p.getInfo(), p.getPrice());
+    }
+
+    public Product showProductInfo(@PathVariable Long id) {
+        return productService.findById(id).get();
     }
 
     @DeleteMapping("/{id}")
