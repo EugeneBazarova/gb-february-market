@@ -29,6 +29,13 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     }
 
+    //TODO
+    $scope.removeOneItem = function (productId){
+        $http.delete('http://localhost:8081/febmarket/api/v1/cart/remove/'+ productId).then(function (response) {
+            $scope.loadCart();
+        });
+    }
+
 
     $scope.deleteProductFromCart = function (productId){
         $http.delete('http://localhost:8081/febmarket/api/v1/cart/delete/'+ productId).then(function (response) {

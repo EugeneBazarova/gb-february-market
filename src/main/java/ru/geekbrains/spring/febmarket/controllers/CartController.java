@@ -22,6 +22,10 @@ public class CartController {
         return cartService.getCurrentCart();
     }
 
+    @DeleteMapping("/remove/{id}")
+    public void removeOneItem(@PathVariable Long id) {
+        cartService.removeOneItem(id);
+    }
 
     @DeleteMapping("/delete/{id}")
     public void deleteFromCart(@PathVariable Long id) {

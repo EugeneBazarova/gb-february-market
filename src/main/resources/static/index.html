@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
@@ -43,15 +44,20 @@
     <table class="table table-hover">
         <tr>
             <td>Название</td>
+            <td>Цена (шт)</td>
             <td>Количество</td>
-            <td>Цена</td>
-            <td></td>
+            <td>Всего</td>
         </tr>
         <tbody>
         <tr ng-repeat="item in cart.items">
             <td>{{item.productTitle}}</td>
-            <td>{{item.quantity}}</td>
-            <td>{{item.pricePerProduct + ' x ' + item.quantity + ' = ' + item.price}}</td>
+            <td>{{item.pricePerProduct}}</td>
+            <td>
+                <button type="button" class="btn btn-primary btn-sm" ng-show="item.quantity > 1" ng-click="removeOneItem(item.productId)"><i class="bi bi-arrow-down-short"></i></i></button>
+                {{item.quantity}}
+                <button type="button" class="btn btn-primary btn-sm" ng-click="addToCart(item.productId)"><i class="bi bi-arrow-up-short"></i></button>
+            </td>
+            <td>{{item.price}}</td>
             <td class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="button" class="btn btn-danger" ng-click="deleteProductFromCart(item.productId)">Удалить</button>
             </td>
@@ -60,7 +66,7 @@
             <td>Итого</td>
             <td></td>
             <td></td>
-            <td>{{cart.totalPrice}}</td>
+            <td style="font-weight: bold">{{cart.totalPrice}}</td>
         </tr>
         </tbody>
     </table>

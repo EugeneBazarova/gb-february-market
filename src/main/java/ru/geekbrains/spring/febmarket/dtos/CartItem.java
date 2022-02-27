@@ -14,5 +14,10 @@ public class CartItem {
     private int quantity;
     private int pricePerProduct;
     private int price;
+
+    public void quantityCount(int count) {
+        quantity += count;
+        price = pricePerProduct * quantity;
+    }
 }
 
