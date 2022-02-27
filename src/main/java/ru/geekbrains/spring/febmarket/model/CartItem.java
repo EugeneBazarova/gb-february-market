@@ -1,4 +1,4 @@
-package ru.geekbrains.spring.febmarket.dtos;
+package ru.geekbrains.spring.febmarket.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

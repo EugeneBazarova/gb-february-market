@@ -2,7 +2,7 @@ package ru.geekbrains.spring.febmarket.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.spring.febmarket.dtos.Cart;
+import ru.geekbrains.spring.febmarket.model.Cart;
 import ru.geekbrains.spring.febmarket.services.CartService;
 
 
