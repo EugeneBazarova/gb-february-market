@@ -12,36 +12,46 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
     <script src="index.js"></script>
 </head>
+<title>
+    spring market
+</title>
+<nav class="navbar navbar-light bg-light" style="margin-bottom: 50px">
+    <div class="container-fluid">
+        <a class="navbar-brand"><i class="bi bi-shop"></i></a>
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
 
 <body>
-
 <div class="container" ng-controller="indexController">
-    <h1>Список продуктов</h1>
 
     <h3>Список товаров</h3>
-    <table class="table table-hover">
+    <table class="table table-hover" style="margin-bottom: 50px">
         <tr>
             <td>ID</td>
             <td>Название</td>
-            <td>Цена</td>
+            <td>Цена (шт)</td>
             <td></td>
         </tr>
         <tbody>
         <tr ng-repeat="p in productsList">
             <td>{{p.id}}</td>
-            <td>{{p.title}}</td>
-            <td>{{p.price}}</td>
+            <td>{{p.title}} <i class="bi bi-info-square-fill" ng-click="showProductInfo(p.id)"></i></td>
+            <td>{{p.price}} ₽</td>
             <td class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="button" class="btn btn-primary" ng-click="addToCart(p.id)">Добавить в корзину</button>
-                <button type="button" class="btn btn-secondary" style="margin: 0px 10px 0px" ng-click="showProductInfo(p.id)">Инфо</button>
+                <button type="button" class="btn btn-primary" ng-click="addToCart(p.id)" style="margin-right: 15px">Добавить в корзину</button>
+
                 <button type="button" class="btn btn-danger" ng-click="deleteProductById(p.id)">Удалить</button>
             </td>
         </tr>
         </tbody>
     </table>
-    <p></p>
+
     <h3>Корзина</h3>
-    <table class="table table-hover">
+    <table class="table table-hover" style="margin-bottom: 30px">
         <tr>
             <td>Название</td>
             <td>Цена (шт)</td>
@@ -51,13 +61,13 @@
         <tbody>
         <tr ng-repeat="item in cart.items">
             <td>{{item.productTitle}}</td>
-            <td>{{item.pricePerProduct}}</td>
+            <td>{{item.pricePerProduct}} ₽</td>
             <td>
                 <button type="button" class="btn btn-primary btn-sm" ng-show="item.quantity > 1" ng-click="removeOneItem(item.productId)"><i class="bi bi-arrow-down-short"></i></i></button>
-                {{item.quantity}}
+                {{item.quantity}} шт.
                 <button type="button" class="btn btn-primary btn-sm" ng-click="addToCart(item.productId)"><i class="bi bi-arrow-up-short"></i></button>
             </td>
-            <td>{{item.price}}</td>
+            <td>{{item.price}} ₽</td>
             <td class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="button" class="btn btn-danger" ng-click="deleteProductFromCart(item.productId)">Удалить</button>
             </td>
@@ -66,14 +76,16 @@
             <td style="font-weight: bold">Итого</td>
             <td></td>
             <td></td>
-            <td style="font-weight: bold">{{cart.totalPrice}}</td>
+            <td style="font-weight: bold">{{cart.totalPrice}} ₽</td>
             <td></td>
         </tr>
         </tbody>
     </table>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-         <button type="button" class="btn btn-danger" ng-click="clearCart()" >Очистить корзину</button>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-bottom: 50px">
+         <button type="button" style="margin-right: 15px" class="btn btn-danger" ng-click="clearCart()" >Очистить корзину</button>
+        <button type="button" class="btn btn-success" ng-click="#" >Оформить заказ </button>
     </div>
 </div>
+
 </body>
 </html>
